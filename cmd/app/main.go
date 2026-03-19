@@ -6,7 +6,7 @@ import (
 
 	"go.uber.org/fx"
 
-	"tictactoe/internal/di"
+	"tic2/internal/di"
 )
 
 func main() {

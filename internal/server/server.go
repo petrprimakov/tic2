@@ -3,9 +3,9 @@ package server
 import (
 	"net/http"
 
-	"tictactoe/internal/config"
-	"tictactoe/internal/middleware"
-	"tictactoe/internal/web/handler"
+	"tic2/internal/config"
+	"tic2/internal/middleware"
+	"tic2/internal/web/handler"
 )
 
 func New(cfg config.Config, h *handler.GameHandler) *http.Server {

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"tictactoe/internal/domain/model"
+	"tic2/internal/domain/model"
 
 	"github.com/google/uuid"
 )

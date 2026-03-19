@@ -3,11 +3,11 @@ package di
 import (
 	"go.uber.org/fx"
 
-	"tictactoe/internal/config"
-	"tictactoe/internal/domain/service"
-	"tictactoe/internal/repository"
-	"tictactoe/internal/server"
-	"tictactoe/internal/web/handler"
+	"tic2/internal/config"
+	"tic2/internal/domain/service"
+	"tic2/internal/repository"
+	"tic2/internal/server"
+	"tic2/internal/web/handler"
 )
 
 var Module = fx.Options(

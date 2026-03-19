@@ -5,9 +5,9 @@ import (
 	"errors"
 	"net/http"
 
-	"tictactoe/internal/apperrors"
-	"tictactoe/internal/domain/service"
-	webmodel "tictactoe/internal/web/model"
+	"tic2/internal/apperrors"
+	"tic2/internal/domain/service"
+	webmodel "tic2/internal/web/model"
 
 	"github.com/google/uuid"
 )
@@ -30,9 +30,9 @@ func (h *GameHandler) CreateGame(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *GameHandler) RegisterRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("POST /tictactoe", h.CreateGame)
-	mux.HandleFunc("POST /tictactoe/{id}", h.PostMove)
-	mux.HandleFunc("DELETE /tictactoe/{id}", h.DeleteGame)
+	mux.HandleFunc("POST /tic2", h.CreateGame)
+	mux.HandleFunc("POST /tic2/{id}", h.PostMove)
+	mux.HandleFunc("DELETE /tic2/{id}", h.DeleteGame)
 }
 
 func (h *GameHandler) PostMove(w http.ResponseWriter, r *http.Request) {

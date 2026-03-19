@@ -1,7 +1,7 @@
 package model
 
 import (
-	domain "tictactoe/internal/domain/model"
+	domain "tic2/internal/domain/model"
 
 	"github.com/google/uuid"
 )

@@ -1,4 +1,4 @@
-module tictactoe
+module tic2
 
 go 1.24
 

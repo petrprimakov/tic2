@@ -2,7 +2,7 @@ package repository
 
 import (
 	"sync"
-	"tictactoe/internal/domain/model"
+	"tic2/internal/domain/model"
 )
 
 type gameStorage struct {
