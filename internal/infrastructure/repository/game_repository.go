@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"tic2/internal/apperrors"
 	"tic2/internal/domain/model"
+	apperrors "tic2/internal/errors"
 
 	"github.com/google/uuid"
 )

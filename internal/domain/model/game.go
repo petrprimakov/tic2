@@ -10,3 +10,9 @@ type Game struct {
 	Status        string    `json:"status"`        // "active", "won", "draw"
 	Winner        int       `json:"winner,omitempty"`
 }
+
+func (b Board) IsEmpty(r, c int) bool { return b[r][c] == 0 }
+
+func NewGame() Game {
+	return Game{ID: uuid.New()}
+}

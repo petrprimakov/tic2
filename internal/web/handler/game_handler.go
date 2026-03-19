@@ -2,11 +2,11 @@ package handler
 
 import (
 	"encoding/json"
+
 	"errors"
 	"net/http"
-
-	"tic2/internal/apperrors"
 	"tic2/internal/domain/service"
+	apperrors "tic2/internal/errors"
 	webmodel "tic2/internal/web/model"
 
 	"github.com/google/uuid"

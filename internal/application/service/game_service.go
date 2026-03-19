@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"tic2/internal/domain/model"
+	domainService "tic2/internal/domain/service"
 	"tic2/internal/infrastructure/repository"
 
 	"github.com/google/uuid"
@@ -14,7 +15,7 @@ type gameService struct {
 	repo repository.GameRepository
 }
 
-func NewGameService(repo repository.GameRepository) GameService {
+func NewGameService(repo repository.GameRepository) domainService.GameService {
 	return &gameService{repo: repo}
 }
 
