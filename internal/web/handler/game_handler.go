@@ -30,9 +30,9 @@ func (h *GameHandler) CreateGame(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *GameHandler) RegisterRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("POST /tic2", h.CreateGame)
-	mux.HandleFunc("POST /tic2/{id}", h.PostMove)
-	mux.HandleFunc("DELETE /tic2/{id}", h.DeleteGame)
+	mux.HandleFunc("POST /game", h.CreateGame)
+	mux.HandleFunc("POST /game/{id}", h.PostMove)
+	mux.HandleFunc("DELETE /game/{id}", h.DeleteGame)
 }
 
 func (h *GameHandler) PostMove(w http.ResponseWriter, r *http.Request) {
