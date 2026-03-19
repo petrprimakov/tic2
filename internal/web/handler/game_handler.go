@@ -2,8 +2,8 @@ package handler
 
 import (
 	"encoding/json"
-
 	"errors"
+	"log"
 	"net/http"
 	"tic2/internal/domain/service"
 	apperrors "tic2/internal/errors"
@@ -42,13 +42,19 @@ func (h *GameHandler) PostMove(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("PostMove: id = %s\n", id)
+
 	var req webmodel.GameRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, http.StatusBadRequest, "malformed request body: "+err.Error())
 		return
 	}
 
+	log.Printf("PostMove: decoded request board = %v\n", req.Cells)
+
 	game := req.ToDomain(id)
+
+	log.Printf("PostMove: game.Board after ToDomain = %v\n", game.Board)
 
 	updated, err := h.svc.ComputeNextMove(r.Context(), game)
 	if err != nil {
@@ -61,6 +67,8 @@ func (h *GameHandler) PostMove(w http.ResponseWriter, r *http.Request) {
 	}
 
 	finished, winner := h.svc.CheckGameOver(r.Context(), updated.Board)
+	log.Printf("PostMove: game finished = %t, winner = %d\n", finished, winner)
+
 	writeJSON(w, http.StatusOK, webmodel.GameResponseFromDomain(updated, finished, winner))
 }
 
