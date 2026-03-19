@@ -3,9 +3,9 @@ package di
 import (
 	"go.uber.org/fx"
 
+	"tic2/internal/application/service"
 	"tic2/internal/config"
-	"tic2/internal/domain/service"
-	"tic2/internal/repository"
+	"tic2/internal/infrastructure/repository"
 	"tic2/internal/server"
 	"tic2/internal/web/handler"
 )
