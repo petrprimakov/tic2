@@ -5,7 +5,7 @@ import (
 
 	"tic2/internal/application/service"
 	"tic2/internal/config"
-	"tic2/internal/infrastructure/repository"
+	"tic2/internal/datasource/repository"
 	"tic2/internal/server"
 	"tic2/internal/web/handler"
 )

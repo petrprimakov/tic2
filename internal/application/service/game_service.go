@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
+	"tic2/internal/datasource/repository"
 	"tic2/internal/domain/model"
 	domainService "tic2/internal/domain/service"
-	"tic2/internal/infrastructure/repository"
 
 	"github.com/google/uuid"
 )
