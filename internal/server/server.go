@@ -8,10 +8,29 @@ import (
 	"tic2/internal/web/handler"
 )
 
-func New(cfg config.Config, h *handler.GameHandler) *http.Server {
-	mux := http.NewServeMux()
-	h.RegisterRoutes(mux)
-	var root http.Handler = mux
+func New(
+	cfg config.Config,
+	h *handler.GameHandler,
+	authHandler *handler.AuthHandler,
+	authenticator *middleware.UserAuthenticator,
+) *http.Server {
+	// публичные маршруты
+	publicMux := http.NewServeMux()
+	publicMux.HandleFunc("POST /signup", authHandler.SignUp)
+	publicMux.HandleFunc("POST /signin", authHandler.SignIn)
+
+	// защищённые маршруты
+	protectedMux := http.NewServeMux()
+	h.RegisterRoutes(protectedMux)
+	protectedHandler := authenticator.Authenticate(protectedMux)
+
+	// корневой mux
+	rootMux := http.NewServeMux()
+	rootMux.Handle("/signup", publicMux)
+	rootMux.Handle("/signin", publicMux)
+	rootMux.Handle("/", protectedHandler)
+
+	var root http.Handler = rootMux
 	root = middleware.Logging(root)
 	root = middleware.Recovery(root)
 
