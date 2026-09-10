@@ -3,7 +3,9 @@ package apperrors
 import "errors"
 
 var (
-	ErrNotFound = errors.New("not found")
+	ErrNotFound     = errors.New("not found")
+	ErrUnauthorized = errors.New("Unauthorized")
+	ErrValidation   = errors.New("validation error")
 )
 
 type AppError struct {

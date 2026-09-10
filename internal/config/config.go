@@ -10,15 +10,21 @@ type Config struct {
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
 	IdleTimeout  time.Duration
+	DatabaseURL  string
+	AuthUser     string
+	AuthPass     string
 }
 
-func Load() Config {
+func Load() (Config, error) {
 	return Config{
 		HTTPAddr:     getEnv("HTTP_ADDR", ":8080"),
 		ReadTimeout:  getDuration("READ_TIMEOUT", 5*time.Second),
 		WriteTimeout: getDuration("WRITE_TIMEOUT", 10*time.Second),
 		IdleTimeout:  getDuration("IDLE_TIMEOUT", 60*time.Second),
-	}
+		DatabaseURL:  os.Getenv("DATABASE_URL"),
+		AuthUser:     os.Getenv("AUTH_USER"),
+		AuthPass:     os.Getenv("AUTH_PASS"),
+	}, nil
 }
 
 func getEnv(key, fallback string) string {
