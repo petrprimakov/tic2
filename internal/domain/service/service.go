@@ -11,9 +11,10 @@ import (
 )
 
 type GameService interface {
-	CreateGame(ctx context.Context) (model.Game, error)
+	CreateGame(ctx context.Context, userID uuid.UUID, vsComputer bool) (model.Game, error)
+	JoinGame(ctx context.Context, gameID, userID uuid.UUID) (model.Game, error)
+	MakeMove(ctx context.Context, gameID, userID uuid.UUID, row, col int) (model.Game, error)
+	GetGame(ctx context.Context, gameID uuid.UUID) (model.Game, error)
+	ListWaiting(ctx context.Context) ([]model.Game, error)
 	DeleteGame(ctx context.Context, id uuid.UUID) error
-	ComputeNextMove(ctx context.Context, game model.Game) (model.Game, error)
-	ValidateBoard(ctx context.Context, persisted, incoming model.Board) error
-	CheckGameOver(ctx context.Context, board model.Board) (bool, int)
 }

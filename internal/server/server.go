@@ -1,3 +1,4 @@
+// internal/server/server.go
 package server
 
 import (
@@ -13,6 +14,10 @@ func New(
 	h *handler.GameHandler,
 	authHandler *handler.AuthHandler,
 	authenticator *middleware.UserAuthenticator,
+	protectedMux := http.NewServeMux()
+	h.RegisterRoutes(protectedMux)
+	userHandler.RegisterRoutes(protectedMux) // новый
+	protectedHandler := authenticator.Authenticate(protectedMux)
 ) *http.Server {
 	// публичные маршруты
 	publicMux := http.NewServeMux()
@@ -41,4 +46,5 @@ func New(
 		WriteTimeout: cfg.WriteTimeout,
 		IdleTimeout:  cfg.IdleTimeout,
 	}
+	
 }

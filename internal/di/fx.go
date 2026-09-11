@@ -31,4 +31,23 @@ var Module = fx.Options(
 
 		server.New,
 	),
+	fx.Provide(
+		config.Load,
+		postgres.NewPool,
+
+		repository.NewGameRepository,
+		repository.NewUserRepository,
+
+		service.NewGameService,
+		service.NewUserService,
+		service.NewAuthService,
+
+		handler.NewGameHandler,
+		handler.NewUserHandler, // ← новый
+		handler.NewAuthHandler,
+
+		middleware.NewUserAuthenticator,
+
+		server.New,
+	),
 )

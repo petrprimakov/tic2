@@ -39,3 +39,7 @@ func (s *UserService) CreateUser(ctx context.Context, req model.SignUpRequest) (
 func (s *UserService) FindByLogin(ctx context.Context, login string) (model.User, error) {
 	return s.repo.GetByLogin(ctx, login)
 }
+
+func (s *UserService) GetByID(ctx context.Context, id uuid.UUID) (model.User, error) {
+	return s.repo.GetByID(ctx, id)
+}

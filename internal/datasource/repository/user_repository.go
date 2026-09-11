@@ -5,17 +5,13 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"tic2/internal/domain/model"
 	apperrors "tic2/internal/errors"
 )
-
-type UserRepository interface {
-	Create(ctx context.Context, user model.User) error
-	GetByLogin(ctx context.Context, login string) (model.User, error)
-}
 
 type userRepository struct {
 	pool *pgxpool.Pool
@@ -45,6 +41,20 @@ func (r *userRepository) GetByLogin(ctx context.Context, login string) (model.Us
 	}
 	if err != nil {
 		return model.User{}, fmt.Errorf("get user by login: %w", err)
+	}
+	return u, nil
+}
+
+func (r *userRepository) GetByID(ctx context.Context, id uuid.UUID) (model.User, error) {
+	const q = `SELECT id, login, password_hash FROM users WHERE id = $1`
+
+	var u model.User
+	err := r.pool.QueryRow(ctx, q, id).Scan(&u.ID, &u.Login, &u.PasswordHash)
+	if errors.Is(err, pgx.ErrNoRows) {
+		return model.User{}, apperrors.ErrNotFound
+	}
+	if err != nil {
+		return model.User{}, fmt.Errorf("get user by id: %w", err)
 	}
 	return u, nil
 }

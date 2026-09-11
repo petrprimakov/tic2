@@ -24,6 +24,9 @@ func (b *Board) MakeMove(row, col, player int) error {
 	b[row][col] = player
 	return nil
 }
+func (b Board) IsEmpty(r, c int) bool {
+	return b[r][c] == 0
+}
 
 // IsFull проверяет, заполнено ли поле
 func (b Board) IsFull() bool {
